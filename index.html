@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>reeper316099 • Project Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Central hub for all of reeper316099's GitHub projects and websites."
+  />
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.18);
+      --accent-2: #22c55e;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+      --shadow-subtle: 0 12px 30px rgba(15, 23, 42, 0.6);
+      --transition-fast: 150ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1160px;
+      margin: auto;
+      background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(15,23,42,0.92));
+      border-radius: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle glow blobs */
+    .blob {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(60px);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 {
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.9), transparent);
+      top: -80px;
+      right: -40px;
+    }
+    .blob-2 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.9), transparent);
+      bottom: -100px;
+      left: -40px;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 8px 20px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 20% 0, #22c55e, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.85);
+    }
+
+    .brand-text h1 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.85);
+      font-size: 11px;
+      color: var(--text-muted);
+      backdrop-filter: blur(8px);
+      white-space: nowrap;
+    }
+
+    .header-pill span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.16);
+      font-size: 10px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 20px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .shell {
+        padding: 18px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-main {
+      padding-right: 10px;
+    }
+
+    .hero-kicker {
+      font-size: 13px;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 3vw, 30px);
+      line-height: 1.15;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 420px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast), border-color var(--transition-fast),
+        color var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-color: rgba(129, 140, 248, 0.8);
+      box-shadow: 0 12px 30px rgba(79, 70, 229, 0.55);
+      color: #e5e7eb;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(79, 70, 229, 0.75);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.45);
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.96);
+      border-color: rgba(148, 163, 184, 0.85);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.8);
+      color: var(--text-main);
+    }
+
+    .hero-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-meta strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-side {
+      border-radius: var(--radius-xl);
+      padding: 10px 12px;
+      background: radial-gradient(circle at 15% 0, rgba(34, 197, 94, 0.08), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hero-side-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .hero-side-list {
+      list-style: none;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: grid;
+      gap: 4px;
+    }
+
+    .hero-side-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-side-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      flex-shrink: 0;
+    }
+
+    /* Projects section */
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 6px 2px 10px;
+    }
+
+    .section-heading h2 {
+      font-size: 15px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-heading h2 span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4f46e5;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.3);
+    }
+
+    .section-heading p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .project-card {
+      position: relative;
+      padding: 12px 12px 10px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(145deg, rgba(15,23,42,0.96), rgba(15,23,42,0.92));
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.85);
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background: radial-gradient(
+        circle at top left,
+        rgba(79, 70, 229, 0.23),
+        transparent 55%
+      );
+      transition: opacity var(--transition-fast);
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px) translateZ(0);
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.95);
+      border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      color: var(--text-muted);
+      margin-bottom: 7px;
+    }
+
+    .project-pill span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .project-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .project-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .project-tag {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(79, 70, 229, 0.16);
+      color: rgba(199, 210, 254, 0.95);
+    }
+
+    .project-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip-link {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      text-decoration: none;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.98);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background var(--transition-fast), border-color var(--transition-fast),
+        transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .chip-link:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: rgba(129, 140, 248, 0.9);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.92);
+    }
+
+    .chip-link svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    footer {
+      border-top: 1px solid rgba(31, 41, 55, 0.95);
+      margin-top: 4px;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: #9ca3af;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(148, 163, 184, 0.6);
+    }
+
+    footer a:hover {
+      color: #e5e7eb;
+      border-bottom-style: solid;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="content">
+      <header>
+        <div class="brand">
+          <div class="brand-icon">R</div>
+          <div class="brand-text">
+            <h1>reeper316099</h1>
+            <p>Project hub • GitHub Pages</p>
+          </div>
+        </div>
+
+        <div class="header-pill">
+          <span>●</span>
+          <div>Live sandbox for school tools, experiments, and random nerdiness.</div>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-main">
+          <div class="hero-kicker">Welcome</div>
+          <div class="hero-title">One hub for all my GitHub websites.</div>
+          <p class="hero-subtitle">
+            Calculators, study tools, random code experiments, and whatever else I feel like
+            deploying. Use the project cards below to jump into a specific site.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn-primary">
+              Browse projects
+              <span>↓</span>
+            </a>
+            <a
+              href="https://github.com/reeper316099"
+              class="btn-ghost"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View GitHub profile
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <strong>Tip:</strong> Bookmark this page –
+            <span>reeper316099.github.io</span> – new projects will appear here as I add them.
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="hero-side-title">What lives here?</div>
+          <ul class="hero-side-list">
+            <li>
+              <span class="hero-side-bullet"></span>
+              <span>Web tools for math, science, and school.</span>
+            </li>
+            <li>
+              <span class="hero-side-bullet"></span>
+              <span>Experimental projects and small apps.</span>
+            </li>
+            <li>
+              <span class="hero-side-bullet"></span>
+              <span>Links to other GitHub Pages sites I spin up.</span>
+            </li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="projects">
+        <div class="section-heading">
+          <h2><span></span>Projects</h2>
+          <p>Edit this section in <code>index.html</code> as you add more sites.</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Barrera Calculators card -->
+          <article class="project-card">
+            <div class="project-pill">
+              <span></span>
+              <div>Live site</div>
+            </div>
+
+            <div class="project-title-row">
+              <div class="project-title">Barrera Calculators</div>
+              <div class="project-tag">Math &amp; Engineering</div>
+            </div>
+
+            <p class="project-desc">
+              A collection of calculators for engineering, auto systems, and other
+              problem-solving tools. Built to help with real-world school and shop tasks.
+            </p>
+
+            <div class="project-meta">
+              <div>Path: <code>/barrera-calculators/</code></div>
+              <div class="project-links">
+                <a href="barrera-calculators/" class="chip-link">
+                  Visit site
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3Z"
+                    />
+                    <path
+                      fill="currentColor"
+                      d="M5 5h5V3H3v7h2V5Zm0 14v-5H3v7h7v-2H5Z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://github.com/reeper316099/barrera-calculators"
+                  class="chip-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View repo
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- TEMPLATE CARD: copy & edit for new sites -->
+          <!--
+          <article class="project-card">
+            <div class="project-pill">
+              <span></span>
+              <div>Live site</div>
+            </div>
+
+            <div class="project-title-row">
+              <div class="project-title">My Next Project</div>
+              <div class="project-tag">Category</div>
+            </div>
+
+            <p class="project-desc">
+              Short description of what this site does, who it's for, or why it exists.
+            </p>
+
+            <div class="project-meta">
+              <div>Path: <code>/my-project/</code></div>
+              <div class="project-links">
+                <a href="my-project/" class="chip-link">
+                  Visit site
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3Z"
+                    />
+                    <path
+                      fill="currentColor"
+                      d="M5 5h5V3H3v7h2V5Zm0 14v-5H3v7h7v-2H5Z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://github.com/reeper316099/REPO_NAME_HERE"
+                  class="chip-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View repo
+                </a>
+              </div>
+            </div>
+          </article>
+          -->
+        </div>
+      </section>
+
+      <footer>
+        <div>© <span id="year"></span> reeper316099 • Built on GitHub Pages</div>
+        <div>
+          Source at
+          <a
+            href="https://github.com/reeper316099/reeper316099.github.io"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            this repo
+          </a>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // auto-fill year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
